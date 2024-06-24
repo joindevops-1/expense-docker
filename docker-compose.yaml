@@ -1,7 +1,6 @@
 networks:
   default:
-    external:
-      name: expense
+    name: expense
 volumes:
   mysql:
 

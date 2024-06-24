@@ -1,0 +1,30 @@
+networks:
+  default:
+    external:
+      name: expense
+volumes:
+  mysql:
+
+services:
+  # docker run -d --name mongodb --network=roboshop mongodb:1
+  mysql:
+    image: mysql:v1.0.0
+    container_name: mysql
+    volumes:
+    - source: mysql
+      target: /var/lib/mysql
+      type: volume
+
+  backend:
+    image: backend:v1.0.0
+    container_name: backend
+    depends_on:
+    - mysql
+
+  frontend:
+    image: frontend:v1.0.0
+    container_name: frontend
+    depends_on:
+    - backend
+    ports:
+      - "80:80"

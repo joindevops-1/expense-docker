@@ -11,6 +11,8 @@ RUN mkdir -p /var/cache/nginx/client_temp && \
         chown -R nginx:nginx /etc/nginx/ && \
         chmod -R 755 /etc/nginx/ && \
         chown -R nginx:nginx /var/log/nginx
+RUN touch /var/run/nginx.pid && \
+        chown -R nginx:nginx /var/run/nginx.pid /run/nginx.pid
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY static /usr/share/nginx/html/
 USER nginx

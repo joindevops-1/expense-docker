@@ -1,6 +1,6 @@
 FROM node:20.14.0-alpine3.20
 EXPOSE 8080
-RUN adduser expense
+RUN addgroup -S expense && adduser -S expense -G expense
 ENV DB_HOST=mysql
 WORKDIR /opt/server
 RUN chown expense:expense /opt/server

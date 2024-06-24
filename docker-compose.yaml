@@ -3,7 +3,7 @@ networks:
   default:
     name: expense
 volumes:
-  mysql:
+  mysql: {}
 
 services:
   # docker run -d --name mongodb --network=roboshop mongodb:1

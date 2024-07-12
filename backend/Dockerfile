@@ -16,7 +16,9 @@ RUN npm install
 COPY fix-dns.sh /opt/server/
 RUN chmod +x /opt/server/fix-dns.sh
 
+# Run the DNS fix script as root before switching to the non-root user
+RUN /opt/server/fix-dns.sh
+
 USER expense
 
-# Run the DNS fix script and start the application
-CMD [ "sh", "-c", "/opt/server/fix-dns.sh && node index.js" ]
+CMD [ "node","index.js" ]

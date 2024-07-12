@@ -1,16 +1,21 @@
-#!/bin/sh
-# Script to adjust ndots in /etc/resolv.conf
+FROM node:20.15.0-alpine3.20
 
-# Check if we can write to /etc/resolv.conf
-if [ -w /etc/resolv.conf ]; then
-  if grep -q "options ndots:" /etc/resolv.conf; then
-      sed -i 's/options ndots:[0-9]*/options ndots:2/' /etc/resolv.conf
-  else
-      echo "options ndots:2" >> /etc/resolv.conf
-  fi
-else
-  echo "Cannot modify /etc/resolv.conf, read-only file system."
-fi
+EXPOSE 8080
+ENV DB_HOST=mysql
 
-# Start the Node.js application
-exec node index.js
+RUN addgroup -S expense && adduser -S expense -G expense \
+    && mkdir /opt/server \
+    && chown expense:expense -R /opt/server
+
+WORKDIR /opt/server
+COPY package.json .
+COPY *.js /opt/server/
+RUN npm install
+
+# Add the script to fix DNS resolution issues and start the application
+COPY entrypoint.sh /opt/server/
+RUN chmod +x /opt/server/entrypoint.sh
+
+USER expense
+
+ENTRYPOINT ["/opt/server/entrypoint.sh"]

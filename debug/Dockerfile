@@ -2,8 +2,8 @@
 FROM debian:latest
 
 # Update package list and install necessary packages
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt update && \
+    apt install -y \
     iputils-ping \
     dnsutils \
     traceroute \

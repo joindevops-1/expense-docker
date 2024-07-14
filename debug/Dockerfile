@@ -18,7 +18,7 @@ RUN apt update && \
     unzip \
     git \
     software-properties-common \
-    mysql-client && \
+    default-mysql-client && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

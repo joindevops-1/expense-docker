@@ -14,7 +14,8 @@ RUN apt-get update && \
     jq \
     unzip \
     git \
-    software-properties-common
+    software-properties-common \
+    mysql-client
 
 # Install Terraform
 RUN wget https://releases.hashicorp.com/terraform/1.5.2/terraform_1.5.2_linux_amd64.zip && \

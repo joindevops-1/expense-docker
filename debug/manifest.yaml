@@ -15,4 +15,5 @@ spec:
       containers:
       - name: debug-container
         image: joindevops/debug:v2
+        imagePullPolicy: Always
         command: ["sleep", "infinity"]
